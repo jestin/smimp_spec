@@ -2,7 +2,7 @@
 
 Version: v0.1
 
-Author: Adam Caudill <adam@adamcaudill.com>
+Authors: Adam Caudill <adam@adamcaudill.com>, Jestin Stoffel <jestin.stoffel@gmail.com>
 
 ### Copyright & Intellectual Property Statement
 
@@ -145,20 +145,20 @@ The get_user API endpoint is used by the client to get information about a recip
 
 On the first request a client makes for a specific user’s information, the full history should be requested so that the client can validate the signatures and hash chain. On subsequent requests the client need only request the public key and validate that it hasn’t changed. If a change is detected, the full history should be pulled and revalidated. 
 
-The public key in the original record, and the most recent public key in the first request for a user’s information must be permanently stored to detect if a user’s history is being truncated or replaced in its entirety. If either of these conditions are detected, the client must not send messages to the user.
+The public key in the original record, and the most recent public key in the first request for a user’s information must be permanently stored to detect if a user’s history is being truncated or replaced in its entirety. If either of these conditions are detected, the client must not send messages to the user.  The public key will be returned as a base64-encoded string
 
 A client may request a user’s most recent information at any time to ensure they present current information to the user.
 
 Each record shall contain fields for the following data, those followed by an asterisk are required to have a value:
 
-* SMIMP Address*
-* Public Key (Ed25519)*
-* Signed hash of last change*
-* Name
-* Web Site URL
-* Profiles (an optional list of social media profiles the user claims is theirs)
-* Additional Data (an optional JSON document with user controlled fields)
-* Date of change - Timestamp of when the change was made (`YYYY-MM-DD hh:mm:ss`); the time will be in UTC. Example: `2014-07-16 19:20:30`
+* SMIMP Address* (`address`)
+* Public Key (Ed25519)* (`public_key`)
+* Signed hash of last change* (`signed_hash`)
+* Name (`name`)
+* Web Site URL (`url`)`
+* Profiles (`profiles`) (an optional list of social media profiles the user claims is theirs)
+* Additional Data (`additional_data`) (an optional JSON document with user controlled fields)
+* Date of change (`date_of_change`) - Timestamp of when the change was made (`YYYY-MM-DD hh:mm:ss`); the time will be in UTC. Example: `2014-07-16 19:20:30`
 
 The document above will be wrapped in another JSON document with two fields; `data` (which will contain the above document), and the signed hash (`signed_hash`), which will be the hash of the `data` field, signed by the user's Ed25519 key.
 
