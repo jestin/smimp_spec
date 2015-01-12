@@ -174,7 +174,10 @@ The `user_avatar` API returns the user supplied JPG or PNG file that can be disp
 The file path provided may be temporary or protected from hotlinking; callers should cache the file and its hash. On subsequent calls, the hash can be compared, and the file will only need to be updated if the hash has changed.
 
 Sample:
-`https://smimp.example.com/0.1/get_user_avatar/adam%23example.com`
+`https://smimp.example.com/0.1/user_avatar/adam%23example.com`
+
+* Url (`url`)
+* Signed Hash of the file (`signed_hash`)
 
 If the hash or signature isn’t valid, the image must be discarded.
 
